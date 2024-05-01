@@ -1,5 +1,4 @@
 package binarySearch;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -10,23 +9,23 @@ public class BinarySearch {
         Scanner sc = new Scanner(System.in);
 
         List<Integer> list = new ArrayList<>();
-        for (int i = 1; i <= 100; i++ ) {
+        for (int i = 1; i <= 102400; i++ ) {
             list.add(i);
         }
 
-        System.out.print("Chouse a number: ");
+        System.out.print("Chose a number: ");
         int one = sc.nextInt();
 
         System.out.println();
 
         System.out.println("Try catch in..");
 
-        testLoop(list, one);
+        testLoopNumber(list, one);
 
         sc.close();
     }
 
-    public static void testLoop(List<Integer> list, int one){
+    public static void testLoopNumber(List<Integer> list, int one){
         int low = 0;
         int hight = list.size();
 
@@ -51,5 +50,9 @@ public class BinarySearch {
                 hight = medium - 1;
             }
         }
+    }
+
+    public static void testAlphabetic() {
+
     }
 }
