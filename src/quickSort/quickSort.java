@@ -41,23 +41,18 @@ public class quickSort {
         sc.close();
     }
 
-    public static Integer count(List<Integer> numbers) {
 
-        Integer last = numbers.getLast();
-        numbers.remove(last);
 
-        if (!numbers.isEmpty()) {
-            count(numbers);
+    public static List<Integer> quickSort(List<Integer> list) {
+        if (list.size() < 2) {
+            return list;
         }
-        return i;
+
+        Integer pivot = list.getFirst();
+
+
     }
 
-    public static Integer calcNumbersRecursion(List<Integer> numbers) {
-        Integer sum = 0;
-        sum += numbers.getLast();
-
-        return null;
-        }
 
     public static Double findMaximunSquareDivision(Double size1, Double size2) {
         Double minor = size2;
