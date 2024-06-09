@@ -1,4 +1,6 @@
 package quickSort;
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -36,7 +38,7 @@ public class quickSort {
         }
 
         System.out.println();
-        System.out.printf("Total: %d", count(numbers));
+        System.out.printf("Total: %d", numbers.size());
 
         sc.close();
     }
@@ -50,7 +52,7 @@ public class quickSort {
 
         Integer pivot = list.getFirst();
 
-
+        return null;
     }
 
 
