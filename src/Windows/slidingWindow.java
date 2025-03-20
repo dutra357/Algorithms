@@ -1,6 +1,6 @@
-package windowsAlg;
+package Windows;
 
-public class window1 {
+public class slidingWindow {
 
     public static void main(String[] args) {
 
@@ -8,6 +8,8 @@ public class window1 {
          * Técnica da 'Janela Deslizante', percorrendo o vetor
          * em busca da maior sequência possível que, somados os elementos,
          * seja menor do que o valor alvo (mais próximo).
+         *
+         * Algorítimo em O(n), comparado ao de força bruta com O(n2).
          */
 
         int[] numbers = new int[]{5,1,7,7,3};
