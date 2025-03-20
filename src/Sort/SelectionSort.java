@@ -1,10 +1,10 @@
-package selectionSort;
+package Sort;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class selectionSort {
+public class SelectionSort {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
