@@ -9,6 +9,10 @@ public class BreadthSearch {
      * Pesquisa em largura possui tempo O(n) + O(n),
      * sendo o somatório para número de pessoas com
      * o número de arestas.
+     *
+     * Na pesquisa em largura, busca-se o menor caminho
+     * com menos arestas/segmentos, o que, entretanto,
+     * não importa necessariamente no mais curto (Dijkstra).
      */
 
     public static boolean pesquisa(String nome, Map<String, List<String>> grafo) {
