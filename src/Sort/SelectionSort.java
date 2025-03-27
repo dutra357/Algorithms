@@ -5,47 +5,57 @@ import java.util.List;
 import java.util.Scanner;
 
 public class SelectionSort {
-    public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
-        Random rand = new Random();
+    /**
+     * Divide em parte ordenada e parte não ordenada. O primeiro, por definiçao
+     * sendo ordenado, passa a ser comparado com os demais.
+     *
+     * Percorrendo um vetor, comparando com o próximo elemento do grupo não ordenado,
+     * caso seja este maior, troca de posição. Assim, o vetor ordenado passa a ganhar também mais
+     * um elemento (candidato).
+     *
+     * Ineficiente para grandes conjuntos, com O(n2).
+     */
 
-        System.out.print("Chose the size of de Array: ");
-        int size = sc.nextInt();
+    public static void selectionSort(int[] arr) {
 
-        System.out.println();
+        int n = arr.length;
 
-        System.out.print("Now, chose the máximum number: ");
-        int limit = sc.nextInt();
+        for (int i = 0; i < n - 1; i++) {
 
-        List<Integer> list = new ArrayList<>();
+            int minIndex = i;
 
-        for (int i = 1; i <= size; i++ ) {
-            int number = rand.nextInt(limit + 1);
-            list.add(number);
+            // Encontra o menor elemento na parte não ordenada
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] < arr[minIndex]) {
+                    minIndex = j;
+                }
+            }
+
+            // Troca o menor elemento encontrado com o elemento na posição i
+            if (minIndex != i) {
+                int temp = arr[i];
+                arr[i] = arr[minIndex];
+                arr[minIndex] = temp;
+            }
         }
-
-        Integer element = (Integer) findMinor(list);
-        System.out.println();
-        System.out.printf("The minor number is: %d", list.get(element));
-
-
-        sc.close();
     }
 
-    //  Big O(n)
-    public static int findMinor(List list) {
-        int minor = (int) list.get(0);
-        int minorIndex = 0;
-        int count = 0;
-
-        for (int i = 0; i < list.size(); i++){
-            if ((int) list.get(i) < minor) {
-                minorIndex = i;
-            }
-            count++;
+    public static void printArray(int[] arr) {
+        for (int num : arr) {
+            System.out.print(num + " ");
         }
-        System.out.printf("Attempts: %d", count);
-        return minorIndex;
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        int[] array = {64, 25, 12, 22, 11};
+        System.out.println("Array original:");
+        printArray(array);
+
+        selectionSort(array);
+
+        System.out.println("Array ordenado:");
+        printArray(array);
     }
 }

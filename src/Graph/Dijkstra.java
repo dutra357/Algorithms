@@ -54,20 +54,20 @@ public class Dijkstra {
         // Inicializando a lista de processados
         List<String> processados = new ArrayList<>();
 
-        String nodo = acheNoCustoMaisBaixo(custos);
+        //String nodo = acheNoCustoMaisBaixo(custos);
 
-        while (nodo != null) { //❷
-            int custo = custos.get(nodo);
-            Map<String, Integer> vizinhos = grafo.get(nodo);
-            for (String n : vizinhos.keySet()) { //❸
-                int novoCusto = custo + vizinhos.get(n);
-                if (custos.get(n) > novoCusto) { //❹
-                    custos.put(n, novoCusto); //❺
-                    pais.put(n, nodo); //❻
-                }
-            }
-            processados.add(nodo); //❼
-            nodo = acheNoCustoMaisBaixo(custos);
-        }
+//        while (nodo != null) { //❷
+//            int custo = custos.get(nodo);
+//            Map<String, Integer> vizinhos = grafo.get(nodo);
+//            for (String n : vizinhos.keySet()) { //❸
+//                int novoCusto = custo + vizinhos.get(n);
+//                if (custos.get(n) > novoCusto) { //❹
+//                    custos.put(n, novoCusto); //❺
+//                    pais.put(n, nodo); //❻
+//                }
+//            }
+//            processados.add(nodo); //❼
+//            nodo = acheNoCustoMaisBaixo(custos);
+//        }
     }
 }
