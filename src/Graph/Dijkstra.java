@@ -1,73 +1,68 @@
 package Graph;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Dijkstra {
 
     /**
      * Útil apenas em grafos acíclicos dirigidos (DAG). Igualmente,
-     * não é válido para arestas com pesos negativos. Para estes,
+     * é inválida para arestas com pesos negativos. Para estes,
      * temos Bellman-Ford.
      *
      */
 
     public static void main(String[] args) {
-
-        //GRAFO
-        // Inicializando o grafo como um mapa
+        // Representação do grafo como um mapa de adjacências
         Map<String, Map<String, Integer>> grafo = new HashMap<>();
 
-        // Definindo as conexões e pesos
-        grafo.put("inicio", new HashMap<>());
-        grafo.get("inicio").put("a", 6);
-        grafo.get("inicio").put("b", 2);
+        grafo.put("A", Map.of("B", 10, "C", 3));
+        grafo.put("B", Map.of("C", 1, "D", 2));
+        grafo.put("C", Map.of("B", 4, "D", 8, "E", 2));
+        grafo.put("D", Map.of("E", 7));
+        grafo.put("E", Map.of("D", 9));
 
-        grafo.put("a", new HashMap<>());
-        grafo.get("a").put("fim", 1);
+        // Executar o algoritmo
+        String inicio = "A";
+        Map<String, Integer> distancias = dijkstra(grafo, inicio);
 
-        grafo.put("b", new HashMap<>());
-        grafo.get("b").put("a", 3);
-        grafo.get("b").put("fim", 5);
+        // Exibindo as distâncias mais curtas
+        System.out.println("Distâncias a partir de " + inicio + ":");
+        distancias.forEach((nodo, distancia) -> System.out.println(nodo + " -> " + distancia));
+    }
 
-        grafo.put("fim", new HashMap<>());
+    public static Map<String, Integer> dijkstra(Map<String, Map<String, Integer>> grafo, String inicio) {
+        // Inicialização
+        Map<String, Integer> distancias = new HashMap<>();
+        Map<String, String> anteriores = new HashMap<>();
+        PriorityQueue<String> fila = new PriorityQueue<>(Comparator.comparingInt(distancias::get));
+        Set<String> visitados = new HashSet<>();
 
+        for (String nodo : grafo.keySet()) {
+            distancias.put(nodo, Integer.MAX_VALUE); // Inicializa todas as distâncias como infinito
+        }
+        distancias.put(inicio, 0);
+        fila.add(inicio);
 
-        //---------------
+        // Processar nós
+        while (!fila.isEmpty()) {
+            String nodoAtual = fila.poll();
+            if (!visitados.add(nodoAtual)) continue;
 
-        Map<String, Integer> custos = new HashMap<>();
-        // Definindo os custos
-        custos.put("a", 6);
-        custos.put("b", 2);
-        custos.put("fim", Integer.MAX_VALUE);
+            Map<String, Integer> vizinhos = grafo.get(nodoAtual);
+            if (vizinhos != null) {
+                for (Map.Entry<String, Integer> vizinho : vizinhos.entrySet()) {
+                    String nodoVizinho = vizinho.getKey();
+                    int peso = vizinho.getValue();
+                    int novaDistancia = distancias.get(nodoAtual) + peso;
 
-
-        // Inicializando o mapa de pais
-        Map<String, String> pais = new HashMap<>();
-        // Definindo os valores para o mapa
-        pais.put("a", "inicio");
-        pais.put("b", "inicio");
-        pais.put("fim", null);
-
-        // Inicializando a lista de processados
-        List<String> processados = new ArrayList<>();
-
-        //String nodo = acheNoCustoMaisBaixo(custos);
-
-//        while (nodo != null) { //❷
-//            int custo = custos.get(nodo);
-//            Map<String, Integer> vizinhos = grafo.get(nodo);
-//            for (String n : vizinhos.keySet()) { //❸
-//                int novoCusto = custo + vizinhos.get(n);
-//                if (custos.get(n) > novoCusto) { //❹
-//                    custos.put(n, novoCusto); //❺
-//                    pais.put(n, nodo); //❻
-//                }
-//            }
-//            processados.add(nodo); //❼
-//            nodo = acheNoCustoMaisBaixo(custos);
-//        }
+                    if (novaDistancia < distancias.getOrDefault(nodoVizinho, Integer.MAX_VALUE)) {
+                        distancias.put(nodoVizinho, novaDistancia);
+                        anteriores.put(nodoVizinho, nodoAtual);
+                        fila.add(nodoVizinho);
+                    }
+                }
+            }
+        }
+        return distancias;
     }
 }
